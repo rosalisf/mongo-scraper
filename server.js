@@ -9,25 +9,63 @@
 // Dependencies
 var express = require("express");
 var mongojs = require("mongojs");
+const path = require("path");
 
 // Initialize Express
 var app = express();
+
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 //Require axios call
-var axios = require("axios.js");
+var axios = require("./axios.js");
 
 // Database configuration
 var databaseUrl = "pitchforkdb";
-var collections = ["music-news-data"];
-
+var collections = ["musicnewsdata"];
+var bodyParser = require("body-parser");
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // Hooking mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
 db.on("error", function(error) {
   console.log("Database Error:", error);
 });
-
+var allDocuments = function(callback) {
+  db.musicnewsdata.find({}, function(error, found) {
+    if (error) {
+      console.log(error);
+    } else {
+      callback(found);
+    }
+  });
+};
 // Main route (simple Hello World Message)
 app.get("/", function(req, res) {
-  res.send("Hello world");
+  axios(function(response) {
+    // console.log("calling?");
+    // console.log(response);
+
+    allDocuments(existingData => {
+      response.forEach(element => {
+        if (
+          existingData.filter(document => document.link === element.link)
+            .length == 0
+        ) {
+          element["comments"] = [];
+          db.musicnewsdata.insert(element);
+        }
+      });
+    });
+    results = db.musicnewsdata.find({}, function(error, found) {
+      if (error) {
+        console.log(error);
+      } else {
+        res.render("index", { results: found });
+      }
+    });
+  });
 });
 
 // TODO: make two more routes
@@ -48,15 +86,23 @@ app.get("/all", function(req, res) {
 });
 // Route 2
 // =======
-// When you visit this route, the server will
-// scrape data from the site of your choice, and save it to
-// MongoDB.
-// TIP: Think back to how you pushed website data
-// into an empty array in the last class. How do you
-// push it into a MongoDB collection instead?
+// Adds comment section and adds comments to the database
 
-/* -/-/-/-/-/-/-/-/-/-/-/-/- */
-
+app.post("/comments", function(req, res) {
+  const identifier = req.body.link;
+  const comment = req.body.comment;
+  console.log(identifier);
+  console.log(comment);
+  console.log(req.body);
+  db.musicnewsdata.update(
+    { link: identifier },
+    { $push: { comments: comment } }
+  );
+  res.json({ success: true });
+});
+// app.get("/test", function(req, res) {
+//   res.sendFile(path.join(__dirname + "/public/test.html"));
+// });
 // Listen on port 3000
 app.listen(3000, function() {
   console.log("App running on port 3000!");
