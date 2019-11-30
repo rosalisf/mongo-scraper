@@ -9,18 +9,17 @@
 // Dependencies
 var express = require("express");
 var mongojs = require("mongojs");
-// Require axios and cheerio. This makes the scraping possible
-var axios = require("axios");
-var cheerio = require("cheerio");
 
 // Initialize Express
 var app = express();
+//Require axios call
+var axios = require("axios.js");
 
 // Database configuration
-var databaseUrl = "huffpostdb";
-var collections = ["webdata"];
+var databaseUrl = "pitchforkdb";
+var collections = ["music-news-data"];
 
-// Hook mongojs configuration to the db variable
+// Hooking mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
 db.on("error", function(error) {
   console.log("Database Error:", error);
@@ -39,7 +38,7 @@ app.get("/", function(req, res) {
 // from the scrapedData collection as a json (this will be populated
 // by the data you scrape using the next route)
 app.get("/all", function(req, res) {
-  db.huffpostdb.find({}, function(error, found) {
+  db.pitchforkdb.find({}, function(error, found) {
     if (error) {
       console.log(error);
     } else {
