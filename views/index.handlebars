@@ -1,6 +1,9 @@
 {{#each results}}
-<h2>{{this.article}}</h2>
-<li>{{this.link}}</li>
+<a href={{this.link}}>
+    <h2>{{this.article}}</h2>
+</a>
+
+{{!-- <p>{{this.link}}</p> --}}
 {{#each this.comments}}
 <p>{{this}}</p>
 {{/each}}

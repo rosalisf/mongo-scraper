@@ -86,8 +86,11 @@ app.get("/all", function(req, res) {
 });
 // Route 2
 // =======
-// Adds comment section and adds comments to the database
+// app.get("/news", function(req, res) {
+//   res.sendFile(path.join(__dirname + "/public/test.html"));
+// });
 
+// Adds comment section and adds comments to the database
 app.post("/comments", function(req, res) {
   const identifier = req.body.link;
   const comment = req.body.comment;
@@ -98,11 +101,10 @@ app.post("/comments", function(req, res) {
     { link: identifier },
     { $push: { comments: comment } }
   );
-  res.json({ success: true });
+  res.json({ identifier, comment });
+  // res.render("comment-page", { identifier, comment });
 });
-// app.get("/test", function(req, res) {
-//   res.sendFile(path.join(__dirname + "/public/test.html"));
-// });
+
 // Listen on port 3000
 app.listen(3000, function() {
   console.log("App running on port 3000!");

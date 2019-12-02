@@ -31,7 +31,7 @@ var axiosJson = function(callback) {
       // Save these results in an object that we'll push into the results array we defined earlier
       results.push({
         article: article,
-        link: link
+        link: "https://pitchfork.com" + link
       });
     });
 
