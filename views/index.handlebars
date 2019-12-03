@@ -1,15 +1,22 @@
-{{#each results}}
-<a href={{this.link}}>
-    <h2>{{this.article}}</h2>
-</a>
+<h1>The Latest Music News</h1>
 
-{{!-- <p>{{this.link}}</p> --}}
-{{#each this.comments}}
-<p>{{this}}</p>
-{{/each}}
-<form action="/comments" method="post">
-    Comment: <input type="text" name="comment" /><br />
-    <input type="submit" name="submit" value="Submit" />
-    <input type="hidden" name="link" value={{this.link}} />
-</form>
+{{#each results}}
+<div data-id="{{this._id}}">
+    <h3>{{@index}}</h3>
+    <a href={{this.link}}>
+        <h2> {{this.article}}</h2>
+    </a>
+
+    {{!-- <p>{{this.link}}</p> --}}
+    {{#each this.comments}}
+
+    <p data-id="{{@index}}">{{this}}<span class="clickable" onclick="remove"> x</span></p>
+
+    {{/each}}
+    <form action="/comments" method="post">
+        Comment: <input type="text" name="comment" /><br />
+        <input type="submit" name="submit" value="Submit" />
+        <input type="hidden" name="link" value={{this.link}} />
+    </form>
+</div>
 {{/each}}

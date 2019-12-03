@@ -28,10 +28,16 @@ var axiosJson = function(callback) {
         .children()
         .attr("href");
 
+      // var image = $(element)
+      //   .children("a")
+      //   .children()
+      //   .children();
+
       // Save these results in an object that we'll push into the results array we defined earlier
       results.push({
         article: article,
         link: "https://pitchfork.com" + link
+        // image: image
       });
     });
 

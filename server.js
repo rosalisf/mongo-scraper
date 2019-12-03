@@ -27,6 +27,7 @@ var collections = ["musicnewsdata"];
 var bodyParser = require("body-parser");
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use("/", express.static(path.join(__dirname, "/public")));
 // Hooking mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
 db.on("error", function(error) {
@@ -93,7 +94,8 @@ app.get("/all", function(req, res) {
 // Adds comment section and adds comments to the database
 app.post("/comments", function(req, res) {
   const identifier = req.body.link;
-  const comment = req.body.comment;
+  const comment = "Anonymous said: " + req.body.comment;
+
   console.log(identifier);
   console.log(comment);
   console.log(req.body);
