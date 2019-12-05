@@ -14,9 +14,9 @@
 
     {{/each}}
     <form action="/comments" method="post">
-        Comment: <input type="text" name="comment" /><br />
-        <input class="write" type="submit" name="submit" value="Submit" />
-        <input class="write2" type="hidden" name="link" value={{this.link}} />
+        Comment: <input class="write" type="text" name="comment" /><br />
+        <input type="submit" name="submit" value="Submit" />
+        <input type="hidden" name="link" value={{this.link}} />
     </form>
 </div>
 {{/each}}
