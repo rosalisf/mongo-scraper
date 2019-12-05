@@ -53,4 +53,14 @@ input {
 
 .clickable {
   color: crimson;
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+.write {
+  color: #df3b5c;
+}
+
+.write2 {
+  color: #df3b5c;
 }
