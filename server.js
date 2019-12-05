@@ -7,6 +7,7 @@
 // if you need a refresher on Cheerio.
 
 // Dependencies
+var mongoose = require("mongoose");
 var express = require("express");
 var mongojs = require("mongojs");
 const path = require("path");
@@ -15,7 +16,8 @@ var app = express();
 var exphbs = require("express-handlebars");
 var MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-
+MONGODB_URI =
+  "mongodb://heroku_zkf3rs5q:7uvfsme3mhn9nk5vtpfbnnaffq@ds251618.mlab.com:51618/heroku_zkf3rs5q";
 mongoose.connect(MONGODB_URI);
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
@@ -31,7 +33,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use("/", express.static(path.join(__dirname, "/public")));
 // Hooking mongojs configuration to the db variable
-var db = mongojs(databaseUrl, collections);
+var db = mongojs(MONGODB_URI, collections);
 db.on("error", function(error) {
   console.log("Database Error:", error);
 });
