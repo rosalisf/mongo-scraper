@@ -112,5 +112,5 @@ app.post("/comments", function(req, res) {
 
 // Listen on port 3000
 app.listen(process.env.PORT, function() {
-  console.log("App running on port 3000!");
+  console.log("App running on PORT!");
 });

@@ -50,3 +50,7 @@ input {
   margin-top: 7.5px;
   color: white;
 }
+
+.clickable {
+  color: crimson;
+}
