@@ -26,7 +26,7 @@ h3 {
 
 h2 {
   font-family: "bely-display", sans-serif;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   font-size: 5em;
   text-align: center;
@@ -61,6 +61,6 @@ input {
   color: #df3b5c;
 }
 
-.form-group{
+.form-group {
   width: 200px;
 }
