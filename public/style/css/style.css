@@ -26,9 +26,9 @@ h3 {
 
 h2 {
   font-family: "bely-display", sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
-  font-size: 5.3em;
+  font-size: 5em;
   text-align: center;
   color: black;
   margin-top: 8px;
@@ -55,13 +55,8 @@ input {
   color: crimson;
   font-family: Helvetica, sans-serif;
   font-weight: 400;
-  font-style: bold;
 }
 
 .write {
   color: #df3b5c;
 }
-
-/* .form-group {
-  width: 200px;
-} */
