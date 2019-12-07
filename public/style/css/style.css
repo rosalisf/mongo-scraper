@@ -60,3 +60,7 @@ input {
 .write {
   color: #df3b5c;
 }
+
+.form-group{
+  width: 200px;
+}
